@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Muhammad Younas | Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@800;900&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0a192f, #0f172a, #1a365d);
+      background-color: #0f172a; /* Fallback for mobile */
+      color: #e2e8f0;
+      overflow-x: hidden;
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      position: relative;
+    }
+    
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+      opacity: 0.35; /* Increased opacity for mobile */
+      z-index: -1;
+    }
+    
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    /* Floating particles */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .particle {
+      position: absolute;
+      background: rgba(96, 165, 250, 0.6);
+      border-radius: 50%;
+      animation: float 15s infinite linear;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0) translateX(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+    }
+    
+    /* Header Styles */
+    header {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      z-index: 3; /* Ensure header is above overlay */
+    }
+    
+    .header-content {
+      text-align: center;
+      z-index: 4; /* Higher z-index for content */
+      max-width: 900px;
+      padding: 20px;
+    }
+    
+    .name-title {
+      font-family: 'Raleway', sans-serif;
+      font-size: 4.5rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+      color: #60a5fa;
+      text-shadow: 0 0 15px rgba(96, 165, 250, 0.5);
+      opacity: 0;
+      animation: fadeInDown 1s ease forwards;
+      letter-spacing: 2px;
+    }
+    
+    .tagline {
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+      color: #cbd5e1;
+      opacity: 0;
+      animation: fadeInUp 1s ease 0.3s forwards;
+    }
+    
+    .skills {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeIn 1s ease 0.6s forwards;
+    }
+    
+    .skill {
+      background: rgba(96, 165, 250, 0.2);
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-weight: 500;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(96, 165, 250, 0.3);
+      transition: all 0.3s ease;
+    }
+    
+    .skill:hover {
+      transform: translateY(-5px);
+      background: rgba(96, 165, 250, 0.3);
+      box-shadow: 0 5px 15px rgba(96, 165, 250, 0.2);
+    }
+    
+    .contact-info {
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeIn 1s ease 0.9s forwards;
+    }
+    
+    .contact-item {
+      margin: 10px 0;
+      font-size: 1.2rem;
+    }
+    
+    .contact-item i {
+      color: #60a5fa;
+      margin-right: 10px;
+    }
+    
+    .link-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    
+    .link-btn {
+      padding: 12px 30px;
+      background: rgba(29, 78, 216, 0.8);
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideFade 0.8s forwards;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(96, 165, 250, 0.3);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    .link-btn:nth-child(1) { animation-delay: 0.5s; }
+    .link-btn:nth-child(2) { animation-delay: 0.7s; }
+    .link-btn:nth-child(3) { animation-delay: 0.9s; }
+    .link-btn:nth-child(4) { animation-delay: 1.1s; }
+    .link-btn:nth-child(5) { animation-delay: 1.3s; }
+    .link-btn:nth-child(6) { animation-delay: 1.5s; }
+    
+    .link-btn:hover {
+      background: rgba(37, 99, 235, 1);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+    }
+    
+    /* Section Styles */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    section {
+      padding: 80px 0;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+    
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .section-inner {
+      background: rgba(30, 41, 59, 0.8);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(96, 165, 250, 0.2);
+    }
+    
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: #60a5fa;
+      position: relative;
+      display: inline-block;
+      font-family: 'Raleway', sans-serif;
+    }
+    
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 70px;
+      height: 4px;
+      background: #60a5fa;
+      border-radius: 2px;
+    }
+    
+    p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    
+    ul {
+      list-style: none;
+      padding-left: 20px;
+    }
+    
+    li {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+    
+    li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: #60a5fa;
+      font-size: 1.2rem;
+    }
+    
+    .certificates {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    
+    .certificate {
+      flex: 1;
+      min-width: 250px;
+      background: rgba(15, 23, 42, 0.6);
+      padding: 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: #e2e8f0;
+      border: 1px solid #3b82f6;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      backdrop-filter: blur(5px);
+    }
+    
+    .certificate i {
+      font-size: 2rem;
+      color: #3b82f6;
+    }
+    
+    .certificate:hover {
+      background: rgba(59, 130, 246, 0.2);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
+    }
+    
+    /* Footer */
+    footer {
+      background: rgba(15, 23, 42, 0.8);
+      padding: 30px 0;
+      text-align: center;
+      border-top: 1px solid rgba(96, 165, 250, 0.2);
+      backdrop-filter: blur(5px);
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .social-link {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(96, 165, 250, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #e2e8f0;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .social-link:hover {
+      background: #3b82f6;
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes slideFade {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    /* Scroll to top button */
+    .scroll-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(96, 165, 250, 0.8);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+      z-index: 100;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .scroll-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .scroll-top:hover {
+      background: #3b82f6;
+      transform: translateY(-5px);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .name-title {
+        font-size: 3rem;
+      }
+      
+      .tagline {
+        font-size: 1.4rem;
+      }
+      
+      .link-btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+      }
+      
+      .section-inner {
+        padding: 30px 20px;
+      }
+      
+      h2 {
+        font-size: 2rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .name-title {
+        font-size: 2.5rem;
+      }
+      
+      .tagline {
+        font-size: 1.2rem;
+      }
+      
+      .skills {
+        gap: 10px;
+      }
+      
+      .skill {
+        padding: 6px 15px;
+        font-size: 0.9rem;
+      }
+      
+      .contact-item {
+        font-size: 1rem;
+      }
+      
+      .link-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .link-btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+      
+      /* Mobile-specific fixes */
+      body::before {
+        opacity: 0.4; /* Slightly higher opacity for mobile */
+      }
+      
+      .header-content {
+        padding: 15px;
+      }
+      
+      .section-inner {
+        background: rgba(30, 41, 59, 0.9); /* More opaque for mobile */
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating particles -->
+  <div class="particles" id="particles"></div>
+  
+  <!-- Scroll to top button -->
+  <div class="scroll-top" id="scrollTop">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+  
+  <header>
+    <div class="header-content">
+      <h1 class="name-title">MUHAMMAD YOUNAS</h1>
+      <h2 class="tagline">Future Software Engineer ✅</h2>
+      
+      <div class="skills">
+        <div class="skill">Python</div>
+        <div class="skill">Web Development</div>
+        <div class="skill">App Development</div>
+        <div class="skill">Graphics Design</div>
+      </div>
+      
+      <div class="contact-info">
+        <div class="contact-item">
+          <i class="fas fa-phone"></i> 03016975723
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i> codeartbyyounas@gmail.com
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-globe"></i> https://code-art-by-younas.github.io/younas-portfolio/
+        </div>
+      </div>
+      
+      <div class="link-buttons">
+        <a href="#about" class="link-btn">
+          <i class="fas fa-user"></i> About Me
+        </a>
+        <a href="#projects" class="link-btn">
+          <i class="fas fa-code"></i> My Projects
+        </a>
+        <a href="#courses" class="link-btn">
+          <i class="fas fa-graduation-cap"></i> Courses
+        </a>
+        <a href="#certificates" class="link-btn">
+          <i class="fas fa-award"></i> Certificates
+        </a>
+        <a href="#contact" class="link-btn">
+          <i class="fas fa-address-card"></i> Contact
+        </a>
+        <a href="#youtube" class="link-btn">
+          <i class="fab fa-youtube"></i> YouTube
+        </a>
+      </div>
+    </div>
+  </header>
+  
+  <div class="container">
+    <section id="about">
+      <div class="section-inner">
+        <h2>About Me</h2>
+        <p>I'm Muhammad Younas, a passionate Software Engineering student at IUB. I specialize in Python development, Canva designing, and full-stack web development. My mission is to transform complex technical concepts into accessible solutions through innovative projects and educational content.</p>
+        <p>With a strong foundation in both programming and design, I create applications that are not only functional but also visually compelling. My approach combines technical expertise with creative problem-solving to deliver impactful digital experiences.</p>
+      </div>
+    </section>
+    
+    <section id="projects">
+      <div class="section-inner">
+        <h2>My Projects</h2>
+        <ul>
+          <li>✅ Python Calculator App - A fully functional calculator with scientific functions and GUI</li>
+          <li>✅ Expense Tracker (HTML/CSS/JS) - Web application for tracking personal finances with visualization</li>
+          <li>✅ Canva Design Templates - Professional templates for social media, presentations, and marketing</li>
+          <li>✅ Portfolio Website - Responsive personal portfolio with modern UI/UX design</li>
+          <li>✅ Task Management System - Python-based productivity tool with database integration</li>
+        </ul>
+      </div>
+    </section>
+    
+    <section id="courses">
+      <div class="section-inner">
+        <h2>Courses Completed</h2>
+        <ul>
+          <li>📘 Python for Everybody Specialization - University of Michigan (Coursera)</li>
+          <li>🎨 Get Started with Canva - Canva Design School (Coursera)</li>
+          <li>💻 Advanced Python Programming - Udemy</li>
+          <li>🌐 Full Stack Web Development Bootcamp - Udemy</li>
+          <li>📱 Mobile App Development with Flutter - Udemy</li>
+        </ul>
+      </div>
+    </section>
+    
+    <section id="certificates">
+      <div class="section-inner">
+        <h2>Certificates</h2>
+        <div class="certificates">
+          <a href="python-for-everybody.pdf" class="certificate">
+            <i class="fab fa-python"></i>
+            <div>
+              <h3>Python Certificate</h3>
+              <p>Coursera - University of Michigan</p>
+            </div>
+          </a>
+          
+          <a href="canva-course.pdf" class="certificate">
+            <i class="fas fa-paint-brush"></i>
+            <div>
+              <h3>Canva Certificate</h3>
+              <p>Coursera - Canva Design School</p>
+            </div>
+          </a>
+          
+          <a href="udemy-certificate.jpg" class="certificate">
+            <i class="fas fa-code"></i>
+            <div>
+              <h3>Udemy Certificate</h3>
+              <p>Advanced Python Programming</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+    
+    <section id="contact">
+      <div class="section-inner">
+        <h2>Contact Me</h2>
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i> codeartbyyounas@gmail.com
+          </div>
+          <div class="contact-item">
+            <i class="fab fa-whatsapp"></i> 03016975723
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i> Kabirwala, Panjab, Pakistan
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section id="youtube">
+      <div class="section-inner">
+        <h2>My YouTube Channel</h2>
+        <p>Subscribe to my YouTube channel for coding tutorials, design tips, tech reviews, and project walkthroughs. I simplify complex concepts and share practical knowledge to help you grow as a developer and designer.</p>
+        <p>New videos every week covering Python programming, web development, UI/UX design, and productivity tools!</p>
+        <a href="https://youtube.com/@codeartbyyounas?si=-aQzyVNZulaclAGl" class="link-btn" style="display: inline-flex; margin-top: 20px;">
+          <i class="fab fa-youtube"></i> Visit My Channel
+        </a>
+      </div>
+    </section>
+  </div>
+  
+  <footer>
+    <div class="social-links">
+      <a href="#" class="social-link">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+      <a href="https://github.com/Code-art-by-younas" class="social-link">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="https://youtube.com/@codeartbyyounas?si=-aQzyVNZulaclAGl" class="social-link">
+        <i class="fab fa-youtube"></i>
+      </a>
+      <a href="https://www.instagram.com/codeartbyyounas?igsh=MWlpc3NnN29iZnJweg%3D%3D&utm_source=qr" class="social-link">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://whatsapp.com/channel/0029VbAVwN07j6g7wZ2ugi3h" class="social-link">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+    </div>
+    <p>© 2023 Muhammad Younas. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    // Create floating particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 30;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // Random size
+        const size = Math.random() * 10 + 2;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        
+        // Random position
+        particle.style.left = `${Math.random() * 100}vw`;
+        particle.style.top = `${Math.random() * 100}vh`;
+        
+        // Random animation duration
+        particle.style.animationDuration = `${Math.random() * 15 + 10}s`;
+        
+        particlesContainer.appendChild(particle);
+      }
+    }
+    
+    // Scroll animation for sections
+    function setupScrollAnimations() {
+      const sections = document.querySelectorAll('section');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+      
+      sections.forEach(section => {
+        observer.observe(section);
+      });
+    }
+    
+    // Scroll to top functionality
+    function setupScrollTop() {
+      const scrollTopBtn = document.getElementById('scrollTop');
+      
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+          scrollTopBtn.classList.add('visible');
+        } else {
+          scrollTopBtn.classList.remove('visible');
+        }
+      });
+      
+      scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    }
+    
+    // Smooth scrolling for anchor links
+    function setupSmoothScrolling() {
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            window.scrollTo({
+              top: target.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    }
+    
+    // Initialize all functions
+    document.addEventListener('DOMContentLoaded', () => {
+      createParticles();
+      setupScrollAnimations();
+      setupScrollTop();
+      setupSmoothScrolling();
+    });
+  </script>
+</body>
+</html>
